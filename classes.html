@@ -83,9 +83,12 @@
 
             <a href="contact.html" class="nav-item nav-link">Liên hệ</a>
           </div>
-          <a href="" class="btn btn-primary rounded-pill px-3 d-none d-lg-block"
-            >Tham gia<i class="fa fa-arrow-right ms-3"></i
-          ></a>
+          <h3 id="userLogged"></h3>
+          <br />
+          <button
+            id="logout"
+            class="btn btn-primary rounded-pill px-3 d-none d-lg-block"
+          ></button>
         </div>
       </nav>
       <!-- Navbar End -->
@@ -160,7 +163,17 @@
                     <div class="col-4">
                       <div class="border-top border-3 border-success pt-2">
                         <h6 class="text-success mb-1"></h6>
-                        <small></small>
+                        <small>
+                          <div>
+                            <button
+                              type="submit"
+                              id="add"
+                              class="add cus-btn add-btn"
+                            >
+                              Add to Cart
+                            </button>
+                          </div></small
+                        >
                       </div>
                     </div>
                     <div class="col-4">
@@ -213,7 +226,17 @@
                     <div class="col-4">
                       <div class="border-top border-3 border-success pt-2">
                         <h6 class="text-success mb-1"></h6>
-                        <small></small>
+                        <small
+                          ><div>
+                            <button
+                              id="add"
+                              type="submit"
+                              class="add cus-btn add-btn"
+                            >
+                              Add to Cart
+                            </button>
+                          </div></small
+                        >
                       </div>
                     </div>
                     <div class="col-4">
@@ -256,7 +279,7 @@
                     class="d-block text-center h3 mt-3 mb-4"
                     href="classDetail.html"
                     target="_blank"
-                    >Phòng cháy chữa cháy(KN4)</a
+                    >Phòng cháy chữa cháy(KN1)</a
                   >
                   <div
                     class="d-flex align-items-center justify-content-between mb-4"
@@ -421,7 +444,7 @@
                   <a
                     class="d-block text-center h3 mt-3 mb-4"
                     href="classDetail.html"
-                    >Sơ cứu khẩn cấp(KN1)</a
+                    >Sơ cứu khẩn cấp(KN4)</a
                   >
                   <div
                     class="d-flex align-items-center justify-content-between mb-4"
@@ -703,7 +726,7 @@
                     <div class="d-flex align-items-center">
                       <div class="ms-3">
                         <h6 class="text-primary mb-1">
-                          Trang bị cách xử lý khi bị lạch khỏi cho mẹ
+                          Trang bị cách xử lý khi bị lạc khỏi cho mẹ
                         </h6>
                       </div>
                     </div>
@@ -1073,6 +1096,53 @@
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/waypoints/waypoints.min.js"></script>
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script>
+      
+      var logOut = document.getElementById("logOut");
+      var isLoggedIn = localStorage.getItem("isLoggedIn");
+      document.addEventListener("DOMContentLoaded", function () {
+        // Hàm xử lý sự kiện
+        function handleAddToCart() {
+          if (isLoggedIn == "true") {
+            alert("Thêm khóa học thành công");
+          } else {
+            alert("Bạn chưa đăng nhập!");
+            window.location.href = "login.html";
+          }
+        }
+        function handleLogBtn() {
+          if (isLoggedIn == "true") {
+            localStorage.removeItem("isLoggedIn");
+            localStorage.removeItem("userLoggedIn");
+            window.location.href = "index.html";
+          } else {
+            window.location.href = "login.html";
+          }
+        }
+        document
+          .getElementById("logout")
+          .addEventListener("click", function () {
+            handleLogBtn();
+          });
+        // Lặp qua tất cả các phần tử có class "addToCart" và gán sự kiện click
+        var addToCartButtons = document.querySelectorAll(".add");
+        addToCartButtons.forEach(function (button) {
+          button.addEventListener("click", handleAddToCart);
+        });
+      });
+      var userLoggedIn = JSON.parse(localStorage.getItem("userLoggedIn"));
+      logBtn = document.getElementById("logout");
+      if (isLoggedIn == "true") {
+        logBtn.innerHTML = "Đăng xuất";
+      } else {
+        logBtn.innerHTML = "Đăng nhập";
+        logBtn.href = "login.html";
+      }
+
+      
+
+      document.getElementById("userLogged").innerHTML = userLoggedIn.username;
+    </script>
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>

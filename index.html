@@ -31,7 +31,10 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
       rel="stylesheet"
     />
-
+    <script
+      src="https://kit.fontawesome.com/31a258efd5.js"
+      crossorigin="anonymous"
+    ></script>
     <!-- Libraries Stylesheet -->
     <link href="lib/animate/animate.min.css" rel="stylesheet" />
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
@@ -87,9 +90,12 @@
 
             <a href="contact.html" class="nav-item nav-link">Liên hệ</a>
           </div>
-          <a href="" class="btn btn-primary rounded-pill px-3 d-none d-lg-block"
-            >Tham gia<i class="fa fa-arrow-right ms-3"></i
-          ></a>
+          
+          <h3 id="userLogged">  </h3><br/>
+          <button id="logout" class="btn btn-primary rounded-pill px-3 d-none d-lg-block" >
+
+
+          </button>
         </div>
       </nav>
       <!-- Navbar End -->
@@ -1171,7 +1177,42 @@
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/waypoints/waypoints.min.js"></script>
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script>
+      var userLoggedIn = JSON.parse(localStorage.getItem("userLoggedIn"));
+      var isLoggedIn = localStorage.getItem("isLoggedIn");
+      console.log(isLoggedIn);
+      logBtn= document.getElementById("logout");
+     if (isLoggedIn=="true"){
+      logBtn.innerHTML = "Đăng xuất"
+    
+     }
+     else{
+      logBtn.innerHTML = "Đăng nhập"
+      logBtn.href="login.html"
 
+     }
+     var logOut = document.getElementById("logOut");
+     document.addEventListener("DOMContentLoaded", function () {
+        // Hàm xử lý sự kiện
+        function handleLogBtn() {
+          if (isLoggedIn == "true") {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userLoggedIn');
+        window.location.href="index.html";
+          } else {
+            window.location.href = "login.html";
+          }
+        }
+
+        // Lặp qua tất cả các phần tử có class "addToCart" và gán sự kiện click
+        document.getElementById("logout").addEventListener("click", function () {
+        
+          handleLogBtn();
+        });
+      });
+    
+      document.getElementById("userLogged").innerHTML = userLoggedIn.username;
+    </script>
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
   </body>
