@@ -327,6 +327,7 @@
       });
 
       function submitForm() {
+        console.log("abc")
         let users = JSON.parse(localStorage.getItem("users")) || [];
         const [popup, setPopup] = useState();
         const [userExists, setUserExists] = useState(false);
@@ -352,7 +353,7 @@
           };
 
           users.push(newUsers);
-          localStorage.setItem("users", users);
+          localStorage.setItem("users", JSON.stringify(users));
           setPopup(true);
           setSubmitting(false);
         };
